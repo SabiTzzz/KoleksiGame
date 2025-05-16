@@ -1,0 +1,10 @@
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.vbproj.AssemblyReference.cache
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.LandingPage.resources
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.MenuGame.resources
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.Resources.resources
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.Search.resources
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.vbproj.GenerateResource.cache
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.AssemblyInfoInputs.cache
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.AssemblyInfo.vb
+C:\Users\Acer\Documents\Belajar\Pemrograman Visual\posttest5\pt6\obj\Debug\net8.0-windows\posttest5.vbproj.CoreCompileInputs.cache
