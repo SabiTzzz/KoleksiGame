@@ -160,7 +160,6 @@ Public Class MenuGame
         e.HasMorePages = False
     End Sub
 
-    ' Ketika tombol preview ditekan, maka akan menampilkan PrintPreviewDialog
     Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
         If DataGridView1.Rows.Count = 0 OrElse (DataGridView1.Rows.Count = 1 AndAlso DataGridView1.Rows(0).IsNewRow) Then
             MessageBox.Show("Silahkan tambahkan game terlebih dahulu.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -170,7 +169,6 @@ Public Class MenuGame
         PrintPreviewDialog1.ShowDialog()
     End Sub
 
-    ' Ketika tombol print ditekan, maka akan menampilkan PrintDialog
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         If DataGridView1.Rows.Count = 0 OrElse (DataGridView1.Rows.Count = 1 AndAlso DataGridView1.Rows(0).IsNewRow) Then
             MessageBox.Show("Silahkan tambahkan game terlebih dahulu.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -184,7 +182,7 @@ Public Class MenuGame
         End If
     End Sub
 
-    ' fungsi untuk menghapus semua radio button yang ada di panel
+
     Private Sub ClearRadioButtons(group As Panel)
         For Each ctrl As Control In group.Controls
             If TypeOf ctrl Is RadioButton Then
@@ -193,7 +191,6 @@ Public Class MenuGame
         Next
     End Sub
 
-    ' fungsi untuk menghapus semua value di textboxt
     Sub Memuat()
         txtJudul.Clear()
         txtDeveloper.Clear()
@@ -204,7 +201,6 @@ Public Class MenuGame
         txtSearch.Clear()
     End Sub
 
-    ' fungsi untuk memasukkan data ke dalam datagridview
     Sub tampilGame()
         Dim query As String = "
         SELECT 
@@ -233,7 +229,7 @@ Public Class MenuGame
         DataGridView1.Refresh()
     End Sub
 
-    ' fungsi untuk mengatur idgame
+
     Sub generateID()
         CMD = New MySqlCommand("SELECT idgame FROM tbgame ORDER BY idgame", CONN)
         Dim reader As MySqlDataReader = CMD.ExecuteReader()
@@ -261,7 +257,6 @@ Public Class MenuGame
         txtID.Text = newID
     End Sub
 
-    ' fungsi untuk mengambil nama dari akun yang sedang login
     Sub ambilNama()
         CMD = New MySqlCommand("SELECT * FROM akun WHERE idakun = '" & IDAKUNLOGIN & "'", CONN)
         RD = CMD.ExecuteReader
@@ -273,8 +268,6 @@ Public Class MenuGame
         End If
         RD.Close()
     End Sub
-
-    ' fungsi untuk mengatur lebar kolom di datagridview
     Sub atur_grid()
         DataGridView1.Columns(0).Width = 50
         DataGridView1.Columns(1).Width = 150
@@ -296,7 +289,6 @@ Public Class MenuGame
         DataGridView1.Columns(8).HeaderText = "Uploaded By"
     End Sub
 
-    ' fungsi untuk mendapatkan rating dari radio button
     Function GetRating() As Integer
         For Each ctrl As Control In Panel1.Controls
             If TypeOf ctrl Is RadioButton AndAlso DirectCast(ctrl, RadioButton).Checked Then
@@ -306,7 +298,6 @@ Public Class MenuGame
         Return 0
     End Function
 
-    ' fungsi untuk menampilkan genre di combobox
     Sub showGenre()
         CMD = New MySqlCommand("SELECT * FROM tbgenre", CONN)
         DA = New MySqlDataAdapter(CMD)
@@ -318,7 +309,6 @@ Public Class MenuGame
         txtGenre.ValueMember = "id_genre"
     End Sub
 
-    ' fungsi untuk menampilkan platform di combobox
     Sub showPlatform()
         CMD = New MySqlCommand("SELECT * FROM tbplatform", CONN)
         DA = New MySqlDataAdapter(CMD)
@@ -330,7 +320,6 @@ Public Class MenuGame
         txtPlatform.ValueMember = "id_platform"
     End Sub
 
-    ' fungsi untuk menyimpan data ke database
     Sub insertdata()
         koneksi()
         Dim rating As Integer = GetRating()
@@ -348,7 +337,6 @@ Public Class MenuGame
         CMD.ExecuteNonQuery()
     End Sub
 
-    ' fungsi untuk memperbarui data di database
     Sub updatedata()
         koneksi()
         Dim rating As Integer = GetRating()
@@ -366,7 +354,6 @@ Public Class MenuGame
         CMD.ExecuteNonQuery()
     End Sub
 
-    ' Ketika tombol tambah ditekan, maka akan memanggil fungsi insertdata
     Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
         Dim rating As Integer = GetRating()
         If txtJudul.Text = "" Or txtGenre.SelectedIndex = -1 Or txtPlatform.SelectedIndex = -1 Or rating = 0 Or txtDeveloper.Text = "" Or txtDeskripsi.Text = "" Then
@@ -393,7 +380,6 @@ Public Class MenuGame
         txtJudul.Focus()
     End Sub
 
-    ' Ketika tombol ubah ditekan, maka akan memanggil fungsi updatedata
     Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
         Dim rating As Integer = GetRating()
         If txtID.Text = "" Or txtJudul.Text = "" Or txtGenre.SelectedIndex = -1 Or txtPlatform.SelectedIndex = -1 Or rating = 0 Or txtDeveloper.Text = "" Or txtDeskripsi.Text = "" Then
@@ -429,7 +415,6 @@ Public Class MenuGame
         txtJudul.Focus()
     End Sub
 
-    ' Ketika tombol hapus ditekan, maka akan menghapus data
     Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
         Dim isOwner As Boolean = False
         CMD = New MySqlCommand("SELECT idakun FROM tbgame WHERE idgame = @idgame", CONN)
@@ -453,7 +438,6 @@ Public Class MenuGame
         txtJudul.Focus()
     End Sub
 
-    ' Fungsi untuk merefresh semua data
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         Memuat()
         tampilGame()
@@ -461,7 +445,6 @@ Public Class MenuGame
         txtJudul.Focus()
     End Sub
 
-    ' Ketika tombol cari ditekan, maka akan mencari data
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Dim searchText As String = txtSearch.Text.Trim()
         Dim query As String = "
@@ -493,13 +476,14 @@ Public Class MenuGame
         DA.Fill(DS, "game")
         If DS.Tables("game").Rows.Count = 0 Then
             MessageBox.Show("Pencarian tidak relevan.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Memuat()
+            tampilGame()
             txtSearch.Clear()
         Else
             DataGridView1.DataSource = DS.Tables("game")
         End If
     End Sub
 
-    ' Ketika cell di datagridview diklik, maka akan menampilkan data di textbox
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         ' Error handling for empty or invalid cell click
         If DataGridView1.CurrentRow Is Nothing OrElse DataGridView1.CurrentRow.Index < 0 Then
@@ -544,14 +528,14 @@ Public Class MenuGame
         End Try
     End Sub
 
-    ' Ketika tombol keluar ditekan, maka akan menampilkan form LandingPage
+
+
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         IDAKUNLOGIN = Nothing
         LandingPage.Show()
         Hide()
     End Sub
 
-    ' Fungsi untuk meload semua fungsi yang ada di menu game
     Private Sub MenuGame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         koneksi()
         Memuat()
