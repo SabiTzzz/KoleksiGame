@@ -1,5 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class Register
+    ' Fungsi untuk menghapus isi textbox
     Sub Memuat()
         txtUsername.Clear()
         txtPassword.Clear()
@@ -7,13 +8,14 @@ Public Class Register
         txtUsername.Focus()
     End Sub
 
+    ' Ketika btnLogin ditekan, maka akan memeriksa apakah username dan password sudah diisi
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         If txtUsername.Text = "" Or txtPassword.Text = "" Or txtCPassword.Text = "" Then
             MessageBox.Show("Username atau Password tidak boleh kosong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        CMD = New MySqlCommand("select * from akun where username = @username", CONN)
+        CMD = New MySqlCommand("SELECT * FROM akun WHERE username = @username", CONN)
         CMD.Parameters.AddWithValue("@username", txtUsername.Text)
         RD = CMD.ExecuteReader()
         Dim usernameExists As Boolean = RD.HasRows
@@ -40,6 +42,7 @@ Public Class Register
         Login.Show()
     End Sub
 
+    ' Fungsi untuk mengload beberapa komponen ketika form ini dimuat
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         koneksi()
         txtPassword.PasswordChar = "o"c
